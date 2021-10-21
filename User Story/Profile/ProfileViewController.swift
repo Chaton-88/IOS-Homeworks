@@ -17,6 +17,12 @@ class ProfileViewController: UIViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         
+        #if DEBUG
+        tableView.backgroundColor = .white
+        #else
+        tableView.backgroundColor = .lightGray
+        #endif
+        
         tableView.toAutoLayout()
         tableView.dataSource = self
         tableView.delegate = self
@@ -61,7 +67,6 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
 }
-
 
 // MARK: UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
