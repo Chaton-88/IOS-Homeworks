@@ -5,7 +5,7 @@ class ProfileTableViewCell: UITableViewCell {
     
     var post: PostVk? {
         didSet {
-            publicationImageView.image = UIImage(named: post?.image ?? "the image is missing")
+            publicationImageView.image = post?.image
             autorLabel.text = post?.autor
             descriptionLabel.text = post?.description
             likesLabel.text = "Likes: \(post?.likes ?? 0)"
@@ -101,3 +101,4 @@ class ProfileTableViewCell: UITableViewCell {
         ])
     }
 }
+
