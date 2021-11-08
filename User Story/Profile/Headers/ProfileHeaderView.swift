@@ -1,5 +1,6 @@
 
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UIView {
     
@@ -75,37 +76,44 @@ class ProfileHeaderView: UIView {
         
         statusTextLabel.toAutoLayout()
         
-        NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            avatarImageView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -40),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 110),
-            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
-            
-            fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 150),
-            fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            fullNameLabel.bottomAnchor.constraint(equalTo: statusLabel.topAnchor, constant: -45),
-            
-            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 45),
-            statusLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 150),
-            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            
-            statusTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 150),
-            statusTextLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            statusTextLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
-            statusTextLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -10),
-            
-            statusTextField.leadingAnchor.constraint(equalTo: statusTextLabel.leadingAnchor, constant: 10),
-            statusTextField.trailingAnchor.constraint(equalTo: statusTextLabel.trailingAnchor, constant: .zero),
-            statusTextField.topAnchor.constraint(equalTo: statusTextLabel.topAnchor, constant: .zero),
-            statusTextField.bottomAnchor.constraint(equalTo: statusTextLabel.bottomAnchor, constant: .zero),
-            
-            setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
-        ])
+        avatarImageView.snp.makeConstraints { (make) in
+            make.top.leading.equalTo(16)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-40)
+            make.width.height.equalTo(110)
+        }
+
+        fullNameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(27)
+            make.bottom.equalTo(statusLabel.snp.top).offset(-45)
+            make.leading.equalTo(150)
+            make.trailing.equalTo(-16)
+        }
+
+        statusLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(fullNameLabel.snp.bottom).offset(45)
+            make.leading.equalTo(150)
+            make.trailing.equalTo(-16)
+        }
+
+        statusTextLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(statusLabel.snp.bottom).offset(10)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-10)
+            make.leading.equalTo(150)
+            make.trailing.equalTo(-16)
+        }
+
+        statusTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(statusTextLabel.snp.top)
+            make.bottom.equalTo(statusTextLabel.snp.bottom)
+            make.leading.equalTo(statusTextLabel.snp.leading).offset(10)
+            make.trailing.equalTo(statusTextLabel.snp.trailing)
+        }
+
+        setStatusButton.snp.makeConstraints { (make) in
+            make.bottom.trailing.equalTo(-16)
+            make.leading.equalTo(16)
+            make.height.equalTo(50)
+        }
     }
     
     required init?(coder: NSCoder) {
