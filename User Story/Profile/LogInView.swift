@@ -5,7 +5,7 @@ protocol LogInViewDelegate: AnyObject {
     func tap()
 }
 
-class LogInView: UIView, UITextFieldDelegate {
+class LogInView: UIView {
     
     weak var delegate: LogInViewDelegate?
     
@@ -38,30 +38,30 @@ class LogInView: UIView, UITextFieldDelegate {
         return laneView
     }()
     
-    private let loginTextField: UITextField = {
+    let loginTextField: UITextField = {
         var loginTextField = UITextField()
         loginTextField.textColor = .black
         loginTextField.autocapitalizationType = .none
         loginTextField.font = UIFont.systemFont(ofSize: 16)
-        loginTextField.placeholder = "Email of phone"
+        loginTextField.placeholder = "Enter login"
         loginTextField.returnKeyType = .done
         loginTextField.toAutoLayout()
         return loginTextField
     }()
     
-    private let passwordTextField: UITextField = {
+    let passwordTextField: UITextField = {
         var passwordTextField = UITextField()
         passwordTextField.textColor = .black
         passwordTextField.autocapitalizationType = .none
         passwordTextField.font = UIFont.systemFont(ofSize: 16)
-        passwordTextField.placeholder = "Password"
+        passwordTextField.placeholder = "Enter password"
         passwordTextField.isSecureTextEntry = true
         passwordTextField.returnKeyType = .done
         passwordTextField.toAutoLayout()
         return passwordTextField
     }()
     
-    private let setProfileButton: UIButton = {
+    let setProfileButton: UIButton = {
         var setProfileButton = UIButton()
         setProfileButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         setProfileButton.setTitle("Log in", for: .normal)
@@ -76,6 +76,11 @@ class LogInView: UIView, UITextFieldDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setProfileButton.isEnabled = false
+        
+        loginTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        
         addSubviews(imageView, containerView,setProfileButton)
         containerView.addSubviews(loginView, passwordView, laneView, passwordTextField, loginTextField)
         
@@ -83,7 +88,7 @@ class LogInView: UIView, UITextFieldDelegate {
         passwordView.toAutoLayout()
         loginView.toAutoLayout()
         laneView.toAutoLayout()
-       
+        
         self.loginTextField.delegate = self
         self.passwordTextField.delegate = self
         
@@ -103,22 +108,22 @@ class LogInView: UIView, UITextFieldDelegate {
             loginView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: .zero),
             loginView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: .zero),
             loginView.heightAnchor.constraint(equalToConstant: 50),
-           
+            
             loginTextField.topAnchor.constraint(equalTo: loginView.topAnchor),
             loginTextField.leadingAnchor.constraint(equalTo: loginView.leadingAnchor, constant: 10),
             loginTextField.trailingAnchor.constraint(equalTo: loginView.trailingAnchor, constant: .zero),
             loginTextField.heightAnchor.constraint(equalToConstant: 50),
-           
+            
             laneView.topAnchor.constraint(equalTo: loginView.bottomAnchor),
             laneView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             laneView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             laneView.heightAnchor.constraint(equalToConstant: 0.5),
-           
+            
             passwordView.topAnchor.constraint(equalTo: laneView.bottomAnchor),
             passwordView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: .zero),
             passwordView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: .zero),
             passwordView.heightAnchor.constraint(equalToConstant: 50),
-           
+            
             passwordTextField.topAnchor.constraint(equalTo: passwordView.topAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: passwordView.leadingAnchor, constant: 10),
             passwordTextField.trailingAnchor.constraint(equalTo: passwordView.trailingAnchor, constant: .zero),
@@ -131,15 +136,10 @@ class LogInView: UIView, UITextFieldDelegate {
             setProfileButton.heightAnchor.constraint(equalToConstant: 50),
             setProfileButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
-        }
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.endEditing(true)
-        return false
     }
     
     @objc func tapButton() {
@@ -147,5 +147,20 @@ class LogInView: UIView, UITextFieldDelegate {
     }
 }
 
+//MARK: text field delegate
+extension LogInView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return false
+    }
+    
+    @objc private func textFieldChanged() {
+        if loginTextField.text?.isEmpty == false,
+           passwordTextField.text?.isEmpty == false {
+            setProfileButton.isEnabled = true
+        }
+    }
+}
 
 

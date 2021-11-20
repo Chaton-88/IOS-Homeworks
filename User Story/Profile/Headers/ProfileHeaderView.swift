@@ -4,8 +4,8 @@ import SnapKit
 
 class ProfileHeaderView: UIView {
     
-    private let avatarImageView: UIImageView = {
-        let avatarImageView = UIImageView(image: #imageLiteral(resourceName: "Incognito"))
+    let avatarImageView: UIImageView = {
+        let avatarImageView = UIImageView()
         avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.borderColor = UIColor.white.cgColor
         avatarImageView.layer.cornerRadius = 55
@@ -14,18 +14,16 @@ class ProfileHeaderView: UIView {
         return avatarImageView
     }()
     
-    private let fullNameLabel: UILabel = {
+    let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
-        fullNameLabel.text = "Incognito"
         fullNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         fullNameLabel.textColor = .black
         fullNameLabel.toAutoLayout()
         return fullNameLabel
     }()
     
-    private let statusLabel: UILabel = {
+    let statusLabel: UILabel = {
         let statusLabel = UILabel()
-        statusLabel.text = "Waiting for something..."
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         statusLabel.textColor = .gray
         statusLabel.toAutoLayout()
@@ -81,34 +79,34 @@ class ProfileHeaderView: UIView {
             make.bottom.equalTo(setStatusButton.snp.top).offset(-40)
             make.width.height.equalTo(110)
         }
-
+        
         fullNameLabel.snp.makeConstraints { (make) in
             make.top.equalTo(27)
             make.bottom.equalTo(statusLabel.snp.top).offset(-45)
             make.leading.equalTo(150)
             make.trailing.equalTo(-16)
         }
-
+        
         statusLabel.snp.makeConstraints { (make) in
             make.top.equalTo(fullNameLabel.snp.bottom).offset(45)
             make.leading.equalTo(150)
             make.trailing.equalTo(-16)
         }
-
+        
         statusTextLabel.snp.makeConstraints { (make) in
             make.top.equalTo(statusLabel.snp.bottom).offset(10)
             make.bottom.equalTo(setStatusButton.snp.top).offset(-10)
             make.leading.equalTo(150)
             make.trailing.equalTo(-16)
         }
-
+        
         statusTextField.snp.makeConstraints { (make) in
             make.top.equalTo(statusTextLabel.snp.top)
             make.bottom.equalTo(statusTextLabel.snp.bottom)
             make.leading.equalTo(statusTextLabel.snp.leading).offset(10)
             make.trailing.equalTo(statusTextLabel.snp.trailing)
         }
-
+        
         setStatusButton.snp.makeConstraints { (make) in
             make.bottom.trailing.equalTo(-16)
             make.leading.equalTo(16)
