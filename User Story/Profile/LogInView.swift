@@ -5,7 +5,7 @@ protocol LogInViewDelegate: AnyObject {
     func tap()
 }
 
-class LogInView: UIView, UITextFieldDelegate {
+class LogInView: UIView {
     
     weak var delegate: LogInViewDelegate?
     
@@ -38,7 +38,7 @@ class LogInView: UIView, UITextFieldDelegate {
         return laneView
     }()
     
-    private let loginTextField: UITextField = {
+    let loginTextField: UITextField = {
         var loginTextField = UITextField()
         loginTextField.textColor = .black
         loginTextField.autocapitalizationType = .none
@@ -49,7 +49,7 @@ class LogInView: UIView, UITextFieldDelegate {
         return loginTextField
     }()
     
-    private let passwordTextField: UITextField = {
+    let passwordTextField: UITextField = {
         var passwordTextField = UITextField()
         passwordTextField.textColor = .black
         passwordTextField.autocapitalizationType = .none
@@ -61,7 +61,7 @@ class LogInView: UIView, UITextFieldDelegate {
         return passwordTextField
     }()
     
-    private let setProfileButton: UIButton = {
+    let setProfileButton: UIButton = {
         var setProfileButton = UIButton()
         setProfileButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         setProfileButton.setTitle("Log in", for: .normal)
@@ -75,6 +75,11 @@ class LogInView: UIView, UITextFieldDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setProfileButton.isEnabled = false
+        
+        loginTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         
         addSubviews(imageView, containerView,setProfileButton)
         containerView.addSubviews(loginView, passwordView, laneView, passwordTextField, loginTextField)
@@ -137,13 +142,24 @@ class LogInView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func tapButton() {
+        delegate?.tap()
+    }
+}
+
+//MARK: text field delegate
+extension LogInView: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.endEditing(true)
         return false
     }
     
-    @objc func tapButton() {
-        delegate?.tap()
+    @objc private func textFieldChanged() {
+        if loginTextField.text?.isEmpty == false,
+           passwordTextField.text?.isEmpty == false {
+            setProfileButton.isEnabled = true
+        }
     }
 }
 

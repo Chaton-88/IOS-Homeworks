@@ -1,7 +1,13 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func checkingValues(login: String, password: String) -> Bool?
+}
+
 class LogInViewController: UIViewController {
+    
+    weak var delegate: LoginViewControllerDelegate?
     
     private let scrollView = UIScrollView()
     private let logInView = LogInView()
@@ -79,7 +85,17 @@ extension UIView {
 
 extension LogInViewController: LogInViewDelegate {
     func tap() {
-        let vc = storyboard?.instantiateViewController(identifier: "ProfileVC")
-        navigationController?.pushViewController(vc!, animated: true)
+        
+        let userLogin = delegate?.checkingValues(login: logInView.loginTextField.text!, password: logInView.passwordTextField.text!)
+        
+        if userLogin == true {
+            let vc = storyboard?.instantiateViewController(identifier: "ProfileVC")
+            navigationController?.pushViewController(vc!, animated: true)
+        } else {
+            logInView.loginTextField.text = nil
+            logInView.passwordTextField.text = nil
+            logInView.loginTextField.attributedPlaceholder = NSAttributedString(string: "User is not found", attributes: [NSAttributedString.Key.foregroundColor : UIColor.red])
+            logInView.setProfileButton.isEnabled = false
+        }
     }
 }
