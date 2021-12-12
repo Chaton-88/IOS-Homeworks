@@ -2,22 +2,24 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
     
-    let delegate = MyLoginFactiry.defaltFactory.checking()
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        let factory = MyLoginFactory()
         
         if let tabController = window?.rootViewController as? UITabBarController,
            let loginNavigation = tabController.viewControllers?.last as? UINavigationController,
            let loginController = loginNavigation.viewControllers.first as? LogInViewController {
-            loginController.delegate = delegate
+            loginController.delegate = factory.checking()
         }
         
         window?.makeKeyAndVisible()
     }
-
+   
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

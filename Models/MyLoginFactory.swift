@@ -6,9 +6,7 @@ protocol LoginFactory {
     func checking() -> LoginViewControllerDelegate
 }
 
-class MyLoginFactiry: LoginFactory {
-    
-    static let defaltFactory = MyLoginFactiry()
+class MyLoginFactory: LoginFactory {
     
     func checking() -> LoginViewControllerDelegate {
         return LoginInspector()

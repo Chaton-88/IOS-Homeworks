@@ -2,12 +2,12 @@
 import UIKit
 
 protocol LoginViewControllerDelegate: AnyObject {
-    func checkingValues(login: String, password: String) -> Bool?
+    func checkingValues(login: String, password: String) -> Bool
 }
 
 class LogInViewController: UIViewController {
     
-    weak var delegate: LoginViewControllerDelegate?
+    var delegate: LoginViewControllerDelegate?
     
     private let scrollView = UIScrollView()
     private let logInView = LogInView()
@@ -86,7 +86,7 @@ extension UIView {
 extension LogInViewController: LogInViewDelegate {
     func tap() {
         
-        let userLogin = delegate?.checkingValues(login: logInView.loginTextField.text!, password: logInView.passwordTextField.text!)
+        let userLogin = delegate?.checkingValues(login: logInView.loginTextField.text ?? "", password: logInView.passwordTextField.text ?? "")
         
         if userLogin == true {
             let vc = storyboard?.instantiateViewController(identifier: "ProfileVC")
@@ -99,3 +99,4 @@ extension LogInViewController: LogInViewDelegate {
         }
     }
 }
+
