@@ -3,10 +3,9 @@ import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
-    var photo: String? {
-        
+    var photo: UIImage? {
         didSet {
-            imageCollection.image = UIImage(named: photo ?? "the image is missing")
+            imageCollection.image = photo
         }
     }
     
