@@ -6,6 +6,9 @@ class LogInViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let logInView = LogInView()
     
+    let currentUser = CurrentUserService()
+    let testUser = TestUserService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,9 +80,30 @@ extension UIView {
     }
 }
 
+//MARK: Login view delegate
 extension LogInViewController: LogInViewDelegate {
     func tap() {
-        let vc = storyboard?.instantiateViewController(identifier: "ProfileVC")
-        navigationController?.pushViewController(vc!, animated: true)
-    }
+        
+#if DEBUG
+        if testUser.verification(fullname: logInView.loginTextField.text!) != nil {
+            let profile = ProfileViewController(userService: testUser, userName: logInView.loginTextField.text!)
+            navigationController?.pushViewController(profile, animated: true)
+        } else {
+            logInView.loginTextField.text = nil
+            logInView.passwordTextField.text = nil
+            logInView.loginTextField.attributedPlaceholder = NSAttributedString(string: "User is not found", attributes: [NSAttributedString.Key.foregroundColor : UIColor.red])
+            logInView.setProfileButton.isEnabled = false
+        }
+#else
+        if currentUser.verification(fullname: logInView.loginTextField.text!) != nil {
+            let profile = ProfileViewController(userService: currentUser, userName: logInView.loginTextField.text!)
+            navigationController?.pushViewController(profile, animated: true)
+        } else {
+            logInView.loginTextField.text = nil
+            logInView.passwordTextField.text = nil
+            logInView.loginTextField.attributedPlaceholder = NSAttributedString(string: "User is not found", attributes: [NSAttributedString.Key.foregroundColor : UIColor.red])
+            logInView.setProfileButton.isEnabled = false
+        }
+#endif
+   }
 }
