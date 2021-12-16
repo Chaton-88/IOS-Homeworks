@@ -1,7 +1,13 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func checkingValues(login: String, password: String) -> Bool
+}
+
 class LogInViewController: UIViewController {
+    
+    var delegate: LoginViewControllerDelegate?
     
     private let scrollView = UIScrollView()
     private let logInView = LogInView()
@@ -84,8 +90,10 @@ extension UIView {
 extension LogInViewController: LogInViewDelegate {
     func tap() {
         
+        let userLogin = delegate?.checkingValues(login: logInView.loginTextField.text ?? "", password: logInView.passwordTextField.text ?? "")
+        
 #if DEBUG
-        if testUser.verification(fullname: logInView.loginTextField.text!) != nil {
+        if userLogin == true, testUser.verification(fullname: logInView.loginTextField.text!) != nil {
             let profile = ProfileViewController(userService: testUser, userName: logInView.loginTextField.text!)
             navigationController?.pushViewController(profile, animated: true)
         } else {
@@ -95,7 +103,7 @@ extension LogInViewController: LogInViewDelegate {
             logInView.setProfileButton.isEnabled = false
         }
 #else
-        if currentUser.verification(fullname: logInView.loginTextField.text!) != nil {
+        if userLogin == true, currentUser.verification(fullname: logInView.loginTextField.text!) != nil {
             let profile = ProfileViewController(userService: currentUser, userName: logInView.loginTextField.text!)
             navigationController?.pushViewController(profile, animated: true)
         } else {
@@ -107,3 +115,4 @@ extension LogInViewController: LogInViewDelegate {
 #endif
    }
 }
+
