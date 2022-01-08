@@ -10,15 +10,8 @@ final class CustomButton: UIButton {
         
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
-        
-
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
-        self.layer.shadowOffset.width = 4
-        self.layer.shadowOffset.height = 4
-        self.layer.shadowRadius = 4
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.7
         self.toAutoLayout()
         
         self.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)

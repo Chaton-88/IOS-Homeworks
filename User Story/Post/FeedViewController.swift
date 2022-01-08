@@ -3,8 +3,12 @@ import UIKit
 import StorageService
 
 final class FeedViewController: UIViewController {
-   
-    let post: Post = Post(title: "Пост")
+    
+    let post = Post(title: "Пост")
+    let postButton = CustomButton(title: "post", titleColor: .black)
+    
+    let feedView = FeedView()
+    let model = ModelScenario()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -19,6 +23,37 @@ final class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(type(of: self), #function)
+        
+        view.backgroundColor = .lightGray
+        self.postButton.backgroundColor = .cyan
+        
+        view.addSubviews(feedView, postButton)
+        feedView.toAutoLayout()
+        
+        feedView.feedButton.buttonAction = { [weak self] in
+            guard let text = self?.feedView.feedTextField.text, !text.isEmpty else { return }
+            self?.model.check(word: text) { [weak self] word in
+                self?.feedView.fill(with: word)
+            }
+        }
+        
+        postButton.buttonAction = { [weak self] in
+            let postView = self?.storyboard?.instantiateViewController(withIdentifier: "Post") as! PostViewController
+            postView.post = self?.post
+            self?.navigationController?.pushViewController(postView, animated: true)
+        }
+        
+        NSLayoutConstraint.activate([
+            feedView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            feedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            feedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            feedView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -200),
+            
+            postButton.topAnchor.constraint(equalTo: feedView.bottomAnchor, constant: 70),
+            postButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 150),
+            postButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -150),
+            postButton.heightAnchor.constraint(equalToConstant: 40),
+        ])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,15 +84,5 @@ final class FeedViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         print(type(of: self), #function)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "post" else {
-            return
-        }
-        guard let postViewController = segue.destination as? PostViewController else {
-            return
-        }
-        postViewController.post = post
     }
 }
