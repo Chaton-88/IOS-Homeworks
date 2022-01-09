@@ -61,21 +61,12 @@ class LogInView: UIView {
         return passwordTextField
     }()
     
-    let setProfileButton: UIButton = {
-        var setProfileButton = UIButton()
-        setProfileButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        setProfileButton.setTitle("Log in", for: .normal)
-        setProfileButton.setTitleColor(.white, for: .normal)
-        setProfileButton.layer.cornerRadius = 10
-        setProfileButton.clipsToBounds = true
-        setProfileButton.toAutoLayout()
-        setProfileButton.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-        return setProfileButton
-    }()
+    let setProfileButton = CustomButton(title: "Log in", titleColor: .white)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setProfileButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         setProfileButton.isEnabled = false
         
         loginTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
@@ -136,14 +127,14 @@ class LogInView: UIView {
             setProfileButton.heightAnchor.constraint(equalToConstant: 50),
             setProfileButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
+        
+        self.setProfileButton.buttonAction = {
+            self.delegate?.tap()
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func tapButton() {
-        delegate?.tap()
     }
 }
 

@@ -30,21 +30,7 @@ class ProfileHeaderView: UIView {
         return statusLabel
     }()
     
-    private let setStatusButton: UIButton = {
-        let setStatusButton = UIButton()
-        setStatusButton.setTitle("Show status", for: .normal)
-        setStatusButton.setTitleColor(.white, for: .normal)
-        setStatusButton.backgroundColor = .blue
-        setStatusButton.layer.cornerRadius = 14
-        setStatusButton.layer.shadowOffset.width = 4
-        setStatusButton.layer.shadowOffset.height = 4
-        setStatusButton.layer.shadowRadius = 4
-        setStatusButton.layer.shadowColor = UIColor.black.cgColor
-        setStatusButton.layer.shadowOpacity = 0.7
-        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        setStatusButton.toAutoLayout()
-        return setStatusButton
-    }()
+    private let setStatusButton = CustomButton(title: "Show status", titleColor: .white)
     
     private let statusTextField: UITextField = {
         let statusTextField = UITextField()
@@ -73,6 +59,7 @@ class ProfileHeaderView: UIView {
         statusTextLabel.addSubview(statusTextField)
         
         statusTextLabel.toAutoLayout()
+        self.setStatusButton.backgroundColor = .blue
         
         avatarImageView.snp.makeConstraints { (make) in
             make.top.leading.equalTo(16)
@@ -112,14 +99,14 @@ class ProfileHeaderView: UIView {
             make.leading.equalTo(16)
             make.height.equalTo(50)
         }
+        
+        self.setStatusButton.buttonAction = {
+            self.statusLabel.text = "\(self.statusText)"
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func buttonPressed() {
-        statusLabel.text = "\(statusText)"
     }
     
     private var statusText: String = ""
