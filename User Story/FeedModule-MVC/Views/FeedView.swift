@@ -24,9 +24,6 @@ final class FeedView: UIView {
     var someLabel: UILabel = {
         var someLabel = UILabel()
         someLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        let myColot = UIColor.green
-        someLabel.layer.borderColor = myColot.cgColor
-        someLabel.layer.borderWidth = 1.0
         someLabel.toAutoLayout()
         return someLabel
     }()
@@ -66,14 +63,14 @@ final class FeedView: UIView {
         }
         
         someLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(feedTextField.snp.bottom).offset(20)
+            make.top.equalTo(feedTextField.snp.bottom).offset(5)
             make.leading.equalTo(50)
             make.trailing.equalTo(-50)
             make.height.equalTo(40)
         }
         
         feedButton.snp.makeConstraints { (make) in
-            make.top.equalTo(someLabel.snp.bottom).offset(20)
+            make.top.equalTo(someLabel.snp.bottom).offset(5)
             make.leading.equalTo(100)
             make.trailing.equalTo(-100)
             make.height.equalTo(40)

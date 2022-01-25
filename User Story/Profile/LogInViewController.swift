@@ -10,7 +10,7 @@ class LogInViewController: UIViewController {
     var delegate: LoginViewControllerDelegate?
     
     private let scrollView = UIScrollView()
-    private let logInView = LogInView()
+    let logInView = LogInView()
     
     let currentUser = CurrentUserService()
     let testUser = TestUserService()
@@ -19,7 +19,9 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = true
+        //self.tabBarController?.tabBar.isHidden = true
         
+        self.view.backgroundColor = .white
         logInView.backgroundColor = .white
         
         view.addSubview(scrollView)
@@ -74,15 +76,6 @@ class LogInViewController: UIViewController {
     @objc fileprivate func keyboardWillHide(notification: NSNotification) {
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
-    }
-}
-
-extension UIView {
-    func toAutoLayout() {
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-    func addSubviews(_ subviews: UIView...) {
-        subviews.forEach { addSubview($0) }
     }
 }
 
