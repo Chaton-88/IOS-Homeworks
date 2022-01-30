@@ -25,4 +25,12 @@ final class ModuleFactory {
         
         return controller
     }
+    
+    func makeAnimalsModule(module: AnimalStorage) -> (presenter: AnimalsPresenter, view: AnimalsViewController) {
+        let presenter = AnimalsPresenter(animalsStorage: module)
+        let controller = AnimalsViewController(presenter: presenter)
+        presenter.viewInput = controller
+        
+        return (presenter, controller)
+    }
 }

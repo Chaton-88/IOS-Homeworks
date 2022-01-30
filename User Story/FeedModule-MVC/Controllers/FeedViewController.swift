@@ -6,7 +6,7 @@ final class FeedViewController: UIViewController {
     
     let post = Post(title: "Эти забавные животные")
     let postButton = CustomButton(title: "post", titleColor: .black)
-    var feedCoordinator: FeedCoordinator?
+    weak var feedCoordinator: FeedCoordinator?
     
     private let feedView = FeedView()
     private let model: ModelScenario

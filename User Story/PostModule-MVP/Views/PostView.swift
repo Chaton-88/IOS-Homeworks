@@ -6,6 +6,7 @@ class PostView: UIView {
     
     var textFieldAction: (() -> Void)?
     let postButton = CustomButton(title: "Показать", titleColor: .black)
+    let imageButton = CustomButton(title: "Смотреть больше!", titleColor: .systemGroupedBackground)
     
     let textField: UITextField = {
         let field = UITextField()
@@ -46,9 +47,11 @@ class PostView: UIView {
         addSubviews(postButton,
                     textField,
                     resultLabel,
-                    postImageView)
+                    postImageView,
+                    imageButton)
         
         postButton.backgroundColor = .systemMint
+        imageButton.backgroundColor = .systemGroupedBackground
         
         textField.snp.makeConstraints { (make) in
             make.top.equalTo(150)
@@ -75,6 +78,12 @@ class PostView: UIView {
             make.height.equalTo(320)
             make.leading.equalTo(25)
             make.trailing.equalTo(-25)
+        }
+        
+        imageButton.snp.makeConstraints { (make) in
+            make.top.equalTo(postImageView.snp.bottom).offset(10)
+            make.leading.equalTo(65)
+            make.trailing.equalTo(-65)
         }
     }
     

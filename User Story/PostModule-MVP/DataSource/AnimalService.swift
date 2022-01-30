@@ -3,7 +3,7 @@ import Foundation
 
 class AnimalService {
     
-    func getAnimal(name:(String), callBack:(Animal?) -> Void) {
+    func getAnimal(name:(String), isRouting: Bool, callBack:(Animal?) -> Void) {
         let animals = [Animal(animalName: "Белка"),
                        Animal(animalName: "Верблюд"),
                        Animal(animalName: "Волк"),

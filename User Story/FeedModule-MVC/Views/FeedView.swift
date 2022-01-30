@@ -6,8 +6,6 @@ final class FeedView: UIView {
     
     let feedButton = CustomButton(title: "check", titleColor: .black)
     
-    var onText: ((String) -> Void)?
-    
     let feedTextField: UITextField = {
         var textField = UITextField()
         textField.textColor = .black

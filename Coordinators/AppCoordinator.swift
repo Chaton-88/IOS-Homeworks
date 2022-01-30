@@ -65,6 +65,5 @@ extension AppCoordinator {
         let coordinator = LogInCoordinator(navigationController: navigationSecond)
         
         return coordinator
-        
     }
 }

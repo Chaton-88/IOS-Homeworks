@@ -1,13 +1,12 @@
 
-
 import Foundation
 
 protocol PostViewInput: AnyObject {
-    func setPicturing(animal named: String, text: String)
+    func setPicturing(animal named: String, text: String, examination: Bool)
 }
 
 protocol PostViewOutput: AnyObject {
-    func showPicturing(name: String)
+    func showPicturing(name: String, show: Bool)
 }
 
 final class PostPresenter: PostViewOutput {
@@ -19,13 +18,13 @@ final class PostPresenter: PostViewOutput {
         self.animalsService = animalService
     }
     
-    func showPicturing(name: String) {
+    func showPicturing(name: String, show: Bool) {
         
-        animalsService.getAnimal(name: name) { [weak self] animals in
+        animalsService.getAnimal(name: name, isRouting: show) { [weak self] animals in
             if let animals = animals {
-                self?.viewInput?.setPicturing(animal: animals.animalName, text: "")
+                self?.viewInput?.setPicturing(animal: animals.animalName, text: "", examination: true)
             } else {
-                self?.viewInput?.setPicturing(animal: "error", text: "К сожалению, такого животного нет...")
+                self?.viewInput?.setPicturing(animal: "error", text: "К сожалению, такого животного нет...", examination: false)
             }
         }
     }
