@@ -15,6 +15,9 @@ class LogInViewController: UIViewController {
     let currentUser = CurrentUserService()
     let testUser = TestUserService()
     
+    private let hacker = PasswordHacker()
+  
+// MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +35,7 @@ class LogInViewController: UIViewController {
         logInView.delegate = self
     }
     
+// MARK: - configure constraints
     func configureConstraints() {
         
         scrollView.toAutoLayout()
@@ -51,6 +55,7 @@ class LogInViewController: UIViewController {
         ])
     }
     
+// MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -58,11 +63,18 @@ class LogInViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+// MARK: - viewDidDisappear
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func createQueue(queue: DispatchQueue = DispatchQueue.global(qos: .userInteractive), complition: @escaping () -> ()) {
+        queue.async {
+            complition()
+        }
     }
     
     @objc fileprivate func keyboardWillShow(notification: NSNotification) {
@@ -107,5 +119,19 @@ extension LogInViewController: LogInViewDelegate {
         }
 #endif
    }
+    
+    func pressPasswordSelection() {
+        logInView.activityIndicator.startAnimating()
+        var password = ""
+        
+        createQueue {
+            password = self.hacker.bruteForce()
+            
+            DispatchQueue.main.async { [self] in
+                logInView.passwordTextField.text = password
+                logInView.passwordTextField.isSecureTextEntry = false
+                logInView.activityIndicator.stopAnimating()
+            }
+        }
+    }
 }
-

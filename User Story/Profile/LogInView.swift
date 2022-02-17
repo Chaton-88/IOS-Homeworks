@@ -3,6 +3,7 @@ import UIKit
 
 protocol LogInViewDelegate: AnyObject {
     func tap()
+    func pressPasswordSelection()
 }
 
 class LogInView: UIView {
@@ -62,6 +63,8 @@ class LogInView: UIView {
     }()
     
     let setProfileButton = CustomButton(title: "Log in", titleColor: .white)
+    let passwordSelectionButton = CustomButton(title: "Choose a password", titleColor: .magenta)
+    let activityIndicator = UIActivityIndicatorView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,10 +72,17 @@ class LogInView: UIView {
         setProfileButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         setProfileButton.isEnabled = false
         
+        passwordSelectionButton.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        passwordSelectionButton.isEnabled = false
+        
+        activityIndicator.color = .gray
+        activityIndicator.style = .medium
+        activityIndicator.toAutoLayout()
+        
         loginTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         
-        addSubviews(imageView, containerView,setProfileButton)
+        addSubviews(imageView, containerView,setProfileButton, passwordSelectionButton, activityIndicator)
         containerView.addSubviews(loginView, passwordView, laneView, passwordTextField, loginTextField)
         
         containerView.toAutoLayout()
@@ -90,12 +100,16 @@ class LogInView: UIView {
             imageView.widthAnchor.constraint(equalToConstant: 100),
             imageView.heightAnchor.constraint(equalToConstant: 100),
             
+            activityIndicator.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 60),
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
             containerView.topAnchor.constraint(equalTo: loginView.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: passwordView.bottomAnchor),
             containerView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             containerView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             
-            loginView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 120),
+            loginView.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 60),
+           // loginView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 120),
             loginView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: .zero),
             loginView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: .zero),
             loginView.heightAnchor.constraint(equalToConstant: 50),
@@ -125,11 +139,21 @@ class LogInView: UIView {
                                                        constant: -16),
             setProfileButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             setProfileButton.heightAnchor.constraint(equalToConstant: 50),
-            setProfileButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            
+            passwordSelectionButton.topAnchor.constraint(equalTo: setProfileButton.bottomAnchor, constant: 16),
+            passwordSelectionButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor,
+                                                       constant: -16),
+            passwordSelectionButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            passwordSelectionButton.heightAnchor.constraint(equalToConstant: 50),
+            passwordSelectionButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         
         self.setProfileButton.buttonAction = {
             self.delegate?.tap()
+        }
+        
+        self.passwordSelectionButton.buttonAction = {
+            self.delegate?.pressPasswordSelection()
         }
     }
     
@@ -147,9 +171,14 @@ extension LogInView: UITextFieldDelegate {
     }
     
     @objc private func textFieldChanged() {
+        
         if loginTextField.text?.isEmpty == false,
            passwordTextField.text?.isEmpty == false {
             setProfileButton.isEnabled = true
+        }
+        
+        if loginTextField.text?.isEmpty == false {
+            passwordSelectionButton.isEnabled = true
         }
     }
 }
