@@ -1,11 +1,14 @@
 
 import UIKit
 import SnapKit
+import iOSIntPackage
 
 class AnimalsViewController: UIViewController {
     
     let presenter: AnimalsViewOutput
     var nameAnimal: String?
+    private let imageProcessor = ImageProcessor()
+    private var processImages = [CGImage]()
     
     init(presenter: AnimalsViewOutput) {
         self.presenter = presenter
@@ -31,7 +34,22 @@ class AnimalsViewController: UIViewController {
         
         collectionAnimalsView.backgroundColor = .systemGroupedBackground
         configureAnimalsConstraints()
+        
+        imageProcessor.processImagesOnThread(sourceImages: dataSource ?? [], filter: .chrome, qos: .default) { newImages in
+            DispatchQueue.main.async {
+                for image in newImages {
+                    self.processImages.append(image!)
+                }
+                self.collectionAnimalsView.reloadData()
+            }
+        }
     }
+// qos: .userInteractive - 2.00 s
+// qos: .userInitiated - 2.00 s
+// qos: .utility - 2.00
+// qos: .background - 6.10
+// qos: .default - 2.00
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
@@ -80,7 +98,13 @@ extension AnimalsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AnimalsCollectionViewCell.self), for: indexPath) as! AnimalsCollectionViewCell
-        cell.animalPhoto = dataSource?[indexPath.row]
+        
+        if !processImages.isEmpty {
+            cell.animalPhoto = UIImage(cgImage: processImages[indexPath.row])
+        } else {
+            cell.animalPhoto = dataSource?[indexPath.row]
+        }
+        
         return cell
     }
 }
