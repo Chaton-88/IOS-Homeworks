@@ -17,7 +17,12 @@ final class AnimalsCoordinator: BaseCoordinator {
         let animalsVC = factory.makeAnimalsModule(module: module)
         animalsVC.presenter.showImage(name: name)
         
-        navigationController.pushViewController(animalsVC.view, animated: true)
+        let transition = CATransition()
+        transition.duration = 2.35
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.fade
+        navigationController.view.layer.add(transition, forKey: nil)
+        navigationController.pushViewController(animalsVC.view, animated: false)
     }
 }
 
