@@ -182,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				041E042127A68E7300A3A2B5 /* DataSourse */,
-				0445AD7627A472FC003F9064 /* AnimalStorage.swift */,
 				04EFB28527A1EF9B00262297 /* Models */,
 				0408588C27A093C4005AC71F /* Views */,
 				04EFB28827A1F08300262297 /* Presenters */,
@@ -274,6 +273,7 @@
 		041E042127A68E7300A3A2B5 /* DataSourse */ = {
 			isa = PBXGroup;
 			children = (
+				0445AD7627A472FC003F9064 /* AnimalStorage.swift */,
 			);
 			path = DataSourse;
 			sourceTree = "<group>";
