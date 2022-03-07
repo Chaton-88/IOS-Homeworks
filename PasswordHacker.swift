@@ -3,18 +3,15 @@ import Foundation
 
 final class PasswordHacker {
     
-    private let passwordToUnlock = "94x"
-    
-    func bruteForce() -> String {
+    func bruteForce(passwordToUnlock: String) -> String {
         
-        let ALLOWED_CHARACTERS: [String] = String().digits.map { String($0) }
+        let ALLOWED_CHARACTERS: [String] = String().printable.map { String($0) }
         
         var password: String = ""
         
         while password != passwordToUnlock {
             password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
         }
-      
         return password 
     }
 }
@@ -40,7 +37,7 @@ func indexOf(character: Character, _ array: [String]) -> Int {
 
 func characterAt(index: Int, _ array: [String]) -> Character {
     return index < array.count ? Character(array[index])
-    : Character("")
+                               : Character("")
 }
 
 func generateBruteForce(_ string: String, fromArray array: [String]) -> String {
@@ -57,7 +54,6 @@ func generateBruteForce(_ string: String, fromArray array: [String]) -> String {
             str = String(generateBruteForce(String(str.dropLast()), fromArray: array)) + String(str.last!)
         }
     }
-    
     return str
 }
 

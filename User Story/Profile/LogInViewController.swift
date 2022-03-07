@@ -22,7 +22,6 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = true
-        //self.tabBarController?.tabBar.isHidden = true
         
         self.view.backgroundColor = .white
         logInView.backgroundColor = .white
@@ -122,10 +121,9 @@ extension LogInViewController: LogInViewDelegate {
     
     func pressPasswordSelection() {
         logInView.activityIndicator.startAnimating()
-        var password = ""
-        
+
         createQueue {
-            password = self.hacker.bruteForce()
+            let password = self.hacker.bruteForce(passwordToUnlock: "1!n3p")
             
             DispatchQueue.main.async { [self] in
                 logInView.passwordTextField.text = password
