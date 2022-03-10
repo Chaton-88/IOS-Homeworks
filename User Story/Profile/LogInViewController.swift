@@ -5,7 +5,7 @@ protocol LoginViewControllerDelegate: AnyObject {
     func checkingValues(login: String, password: String) -> Bool
 }
 
-class LogInViewController: UIViewController {
+final class LogInViewController: UIViewController {
     
     var delegate: LoginViewControllerDelegate?
     
@@ -92,43 +92,48 @@ class LogInViewController: UIViewController {
 
 //MARK: Login view delegate
 extension LogInViewController: LogInViewDelegate {
-    func tap() {
+    
+    func tap() throws {
         
         let userLogin = delegate?.checkingValues(login: logInView.loginTextField.text ?? "", password: logInView.passwordTextField.text ?? "")
         
 #if DEBUG
-        if userLogin == true, testUser.verification(fullname: logInView.loginTextField.text!) != nil {
-            let profile = ProfileViewController(userService: testUser, userName: logInView.loginTextField.text!)
-            navigationController?.pushViewController(profile, animated: true)
-        } else {
-            logInView.loginTextField.text = nil
-            logInView.passwordTextField.text = nil
-            logInView.loginTextField.attributedPlaceholder = NSAttributedString(string: "User is not found", attributes: [NSAttributedString.Key.foregroundColor : UIColor.red])
-            logInView.setProfileButton.isEnabled = false
-        }
+        guard userLogin == true, testUser.verification(fullname: logInView.loginTextField.text!) != nil
+        else { throw AuthError.dataNotExists }
+        let profile = ProfileViewController(userService: testUser, userName: logInView.loginTextField.text!)
+        navigationController?.pushViewController(profile, animated: true)
+        
 #else
-        if userLogin == true, currentUser.verification(fullname: logInView.loginTextField.text!) != nil {
-            let profile = ProfileViewController(userService: currentUser, userName: logInView.loginTextField.text!)
-            navigationController?.pushViewController(profile, animated: true)
-        } else {
-            logInView.loginTextField.text = nil
-            logInView.passwordTextField.text = nil
-            logInView.loginTextField.attributedPlaceholder = NSAttributedString(string: "User is not found", attributes: [NSAttributedString.Key.foregroundColor : UIColor.red])
-            logInView.setProfileButton.isEnabled = false
-        }
+        guard userLogin == true, currentUser.verification(fullname: logInView.loginTextField.text!) != nil else { throw AuthError.dataNotExists }
+        let profile = ProfileViewController(userService: currentUser, userName: logInView.loginTextField.text!)
+        navigationController?.pushViewController(profile, animated: true)
+        
 #endif
-   }
+    }
+    
+    func errorCatched(error: String) {
+        self.showAlert(withError: error)
+    }
     
     func pressPasswordSelection() {
         logInView.activityIndicator.startAnimating()
-
+        
         createQueue {
-            let password = self.hacker.bruteForce(passwordToUnlock: "1!n3p")
-            
-            DispatchQueue.main.async { [self] in
-                logInView.passwordTextField.text = password
-                logInView.passwordTextField.isSecureTextEntry = false
-                logInView.activityIndicator.stopAnimating()
+            self.hacker.bruteForce(passwordToUnlock: "1pi") { [self] result in
+                switch result {
+                case .success(let password):
+                    DispatchQueue.main.async { [self] in
+                        logInView.passwordTextField.text = password
+                        logInView.passwordTextField.isSecureTextEntry = false
+                        logInView.activityIndicator.stopAnimating()
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        logInView.activityIndicator.stopAnimating()
+                        self.errorCatched(error: "The operation cannot be completed. Try again.")
+                    }
+                }
             }
         }
     }

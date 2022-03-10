@@ -2,8 +2,9 @@
 import UIKit
 
 protocol LogInViewDelegate: AnyObject {
-    func tap()
+    func tap() throws
     func pressPasswordSelection()
+    func errorCatched(error: String)
 }
 
 class LogInView: UIView {
@@ -149,7 +150,18 @@ class LogInView: UIView {
         ])
         
         self.setProfileButton.buttonAction = {
-            self.delegate?.tap()
+            do {
+                try self.delegate?.tap()
+            } catch AuthError.dataNotExists {
+                self.loginTextField.text = nil
+                self.passwordTextField.text = nil
+                self.setProfileButton.isEnabled = false
+                let error = "User is not found. Try again"
+                self.delegate?.errorCatched(error: error)
+                print("User is not found")
+            } catch {
+                print("Unknown error")
+            }
         }
         
         self.passwordSelectionButton.buttonAction = {

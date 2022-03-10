@@ -38,6 +38,8 @@
 		0479B191271B239F00BE105D /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479B190271B239F00BE105D /* Section.swift */; };
 		0479B194271B240F00BE105D /* PostSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479B193271B240F00BE105D /* PostSection.swift */; };
 		0495EBE026B3247400D37E52 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495EBDF26B3247400D37E52 /* Photos.swift */; };
+		0496211627DA6A1600914F89 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496211527DA6A1600914F89 /* AuthError.swift */; };
+		0496211827DA6AC400914F89 /* extension - ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496211727DA6AC400914F89 /* extension - ViewController.swift */; };
 		049D7D54279D5B7A003B0DFE /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D7D53279D5B7A003B0DFE /* PostCoordinator.swift */; };
 		049D7D56279D6AC0003B0DFE /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D7D55279D6AC0003B0DFE /* FeedCoordinator.swift */; };
 		04AA88CE2789F9AD00825AD3 /* ModelScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA88CD2789F9AD00825AD3 /* ModelScenario.swift */; };
@@ -121,6 +123,8 @@
 		0479B190271B239F00BE105D /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		0479B193271B240F00BE105D /* PostSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSection.swift; sourceTree = "<group>"; };
 		0495EBDF26B3247400D37E52 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		0496211527DA6A1600914F89 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		0496211727DA6AC400914F89 /* extension - ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension - ViewController.swift"; sourceTree = "<group>"; };
 		049D7D53279D5B7A003B0DFE /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		049D7D55279D6AC0003B0DFE /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		04AA88CD2789F9AD00825AD3 /* ModelScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelScenario.swift; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				045632FB27712782005BF41B /* CustomButton.swift */,
+				0496211727DA6AC400914F89 /* extension - ViewController.swift */,
 				04C04F3E27973DF200701FBB /* extension - View.swift */,
 			);
 			path = "CustomViews + extension";
@@ -391,6 +396,7 @@
 				04CCBC2C2657E17F0075342C /* ProfileViewController.swift */,
 				04384492275E7ED00026BCE8 /* LoginInspector.swift */,
 				041464D82676829F008F599F /* LogInView.swift */,
+				0496211527DA6A1600914F89 /* AuthError.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -665,12 +671,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0496211827DA6AC400914F89 /* extension - ViewController.swift in Sources */,
 				04AA88D02789FA4300825AD3 /* FeedView.swift in Sources */,
 				045632FC27712782005BF41B /* CustomButton.swift in Sources */,
 				04FEADBB27BE3B2C00CF42A7 /* PasswordHacker.swift in Sources */,
 				04AA88CE2789F9AD00825AD3 /* ModelScenario.swift in Sources */,
 				0408EF25279C95D900DB50CF /* AnimalService.swift in Sources */,
 				04EFB28C27A1FDB600262297 /* AnimalsCoordinator.swift in Sources */,
+				0496211627DA6A1600914F89 /* AuthError.swift in Sources */,
 				0495EBE026B3247400D37E52 /* Photos.swift in Sources */,
 				049D7D56279D6AC0003B0DFE /* FeedCoordinator.swift in Sources */,
 				0476944C274114A800B5DF20 /* CurrentUserService.swift in Sources */,

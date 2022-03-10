@@ -3,7 +3,9 @@ import Foundation
 
 final class PasswordHacker {
     
-    func bruteForce(passwordToUnlock: String) -> String {
+    typealias Handler = (Result<String, AuthError>) -> Void
+    
+    func bruteForce(passwordToUnlock: String, completion: @escaping Handler) {
         
         let ALLOWED_CHARACTERS: [String] = String().printable.map { String($0) }
         
@@ -12,7 +14,12 @@ final class PasswordHacker {
         while password != passwordToUnlock {
             password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
         }
-        return password 
+        
+        guard password.count > 2 else {
+            completion(.success(password))
+            return
+        }
+        completion(.failure(AuthError.badPassword))
     }
 }
 
