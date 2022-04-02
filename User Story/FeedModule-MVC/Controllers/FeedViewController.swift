@@ -4,28 +4,28 @@ import StorageService
 
 final class FeedViewController: UIViewController {
     
-    let post = Post(title: "Пост")
+    let post = Post(title: "Эти забавные животные")
     let postButton = CustomButton(title: "post", titleColor: .black)
+    weak var feedCoordinator: FeedCoordinator?
     
-    let feedView = FeedView()
-    let model = ModelScenario()
+    private let feedView = FeedView()
+    private let model: ModelScenario
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        print(type(of: self), #function)
+    init(model: ModelScenario) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        print(type(of: self), #function)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(type(of: self), #function)
         
-        view.backgroundColor = .lightGray
-        self.postButton.backgroundColor = .cyan
+        view.backgroundColor = .systemTeal
+        self.postButton.backgroundColor = .green
         
         view.addSubviews(feedView, postButton)
         feedView.toAutoLayout()
@@ -37,10 +37,8 @@ final class FeedViewController: UIViewController {
             }
         }
         
-        postButton.buttonAction = { [weak self] in
-            let postView = self?.storyboard?.instantiateViewController(withIdentifier: "Post") as! PostViewController
-            postView.post = self?.post
-            self?.navigationController?.pushViewController(postView, animated: true)
+        postButton.buttonAction = { [ weak self ] in
+            self?.feedCoordinator?.coordinateToPost(title: self?.post.title ?? "")
         }
         
         NSLayoutConstraint.activate([
@@ -59,6 +57,8 @@ final class FeedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print(type(of: self), #function)
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {

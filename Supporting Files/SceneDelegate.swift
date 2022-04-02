@@ -4,20 +4,39 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+   
+    private var rootCoordinator: AppCoordinator!
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
         
-        let factory = MyLoginFactory()
+        let tabController = UITabBarController()
+        let factory = ModuleFactory()
+        rootCoordinator = AppCoordinator(tabBarController: tabController, factory: factory)
         
-        if let tabController = window?.rootViewController as? UITabBarController,
-           let loginNavigation = tabController.viewControllers?.last as? UINavigationController,
-           let loginController = loginNavigation.viewControllers.first as? LogInViewController {
-            loginController.delegate = factory.checking()
-        }
-        
+        window = UIWindow(windowScene: scene)
+        window?.rootViewController = tabController
         window?.makeKeyAndVisible()
+        
+        rootCoordinator.start()
+        
+        
+      //  window?.rootViewController = tabController
+       // let feedController = FeedViewController(model: model)
+//        let presenter = PostPresenter()
+//        let postController = PostViewController(presenter: presenter)
+//        presenter.viewInput = postController
+//        let loginController = LogInViewController()
+      //  let feedNavigation = UINavigationController(rootViewController: feedController)
+      //  let loginNavigation = UINavigationController(rootViewController: loginController)
+        //tabController.viewControllers = [feedNavigation, loginNavigation]
+     //   tabController.viewControllers = [postController, loginNavigation]
+//
+//        let factory = MyLoginFactory()
+//        loginController.delegate = factory.checking()
+//
+//        window?.makeKeyAndVisible()
     }
    
     func sceneDidDisconnect(_ scene: UIScene) {
