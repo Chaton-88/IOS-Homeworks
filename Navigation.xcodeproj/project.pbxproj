@@ -38,6 +38,8 @@
 		0479B191271B239F00BE105D /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479B190271B239F00BE105D /* Section.swift */; };
 		0479B194271B240F00BE105D /* PostSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479B193271B240F00BE105D /* PostSection.swift */; };
 		0495EBE026B3247400D37E52 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0495EBDF26B3247400D37E52 /* Photos.swift */; };
+		0496211627DA6A1600914F89 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496211527DA6A1600914F89 /* AuthError.swift */; };
+		0496211827DA6AC400914F89 /* extension - ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496211727DA6AC400914F89 /* extension - ViewController.swift */; };
 		049D7D54279D5B7A003B0DFE /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D7D53279D5B7A003B0DFE /* PostCoordinator.swift */; };
 		049D7D56279D6AC0003B0DFE /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D7D55279D6AC0003B0DFE /* FeedCoordinator.swift */; };
 		04AA88CE2789F9AD00825AD3 /* ModelScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA88CD2789F9AD00825AD3 /* ModelScenario.swift */; };
@@ -56,6 +58,7 @@
 		04EFB28727A1EFB500262297 /* AnimalsPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EFB28627A1EFB500262297 /* AnimalsPhoto.swift */; };
 		04EFB28A27A1F09E00262297 /* AnimalsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EFB28927A1F09E00262297 /* AnimalsPresenter.swift */; };
 		04EFB28C27A1FDB600262297 /* AnimalsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EFB28B27A1FDB600262297 /* AnimalsCoordinator.swift */; };
+		04FEADBB27BE3B2C00CF42A7 /* PasswordHacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEADBA27BE3B2C00CF42A7 /* PasswordHacker.swift */; };
 		060782B2250CE27700A87020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B1250CE27700A87020 /* AppDelegate.swift */; };
 		060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B3250CE27700A87020 /* SceneDelegate.swift */; };
 		060782B6250CE27700A87020 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B5250CE27700A87020 /* FeedViewController.swift */; };
@@ -120,6 +123,8 @@
 		0479B190271B239F00BE105D /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		0479B193271B240F00BE105D /* PostSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSection.swift; sourceTree = "<group>"; };
 		0495EBDF26B3247400D37E52 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		0496211527DA6A1600914F89 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		0496211727DA6AC400914F89 /* extension - ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension - ViewController.swift"; sourceTree = "<group>"; };
 		049D7D53279D5B7A003B0DFE /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		049D7D55279D6AC0003B0DFE /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		04AA88CD2789F9AD00825AD3 /* ModelScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelScenario.swift; sourceTree = "<group>"; };
@@ -136,6 +141,7 @@
 		04EFB28627A1EFB500262297 /* AnimalsPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsPhoto.swift; sourceTree = "<group>"; };
 		04EFB28927A1F09E00262297 /* AnimalsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsPresenter.swift; sourceTree = "<group>"; };
 		04EFB28B27A1FDB600262297 /* AnimalsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsCoordinator.swift; sourceTree = "<group>"; };
+		04FEADBA27BE3B2C00CF42A7 /* PasswordHacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PasswordHacker.swift; path = "/Users/valeriyatrofimova/Desktop/IOS-Homeworks/PasswordHacker.swift"; sourceTree = "<absolute>"; };
 		060782AE250CE27700A87020 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		060782B1250CE27700A87020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		060782B3250CE27700A87020 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				041E042127A68E7300A3A2B5 /* DataSourse */,
-				0445AD7627A472FC003F9064 /* AnimalStorage.swift */,
 				04EFB28527A1EF9B00262297 /* Models */,
 				0408588C27A093C4005AC71F /* Views */,
 				04EFB28827A1F08300262297 /* Presenters */,
@@ -272,6 +277,7 @@
 		041E042127A68E7300A3A2B5 /* DataSourse */ = {
 			isa = PBXGroup;
 			children = (
+				0445AD7627A472FC003F9064 /* AnimalStorage.swift */,
 			);
 			path = DataSourse;
 			sourceTree = "<group>";
@@ -280,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				045632FB27712782005BF41B /* CustomButton.swift */,
+				0496211727DA6AC400914F89 /* extension - ViewController.swift */,
 				04C04F3E27973DF200701FBB /* extension - View.swift */,
 			);
 			path = "CustomViews + extension";
@@ -389,6 +396,7 @@
 				04CCBC2C2657E17F0075342C /* ProfileViewController.swift */,
 				04384492275E7ED00026BCE8 /* LoginInspector.swift */,
 				041464D82676829F008F599F /* LogInView.swift */,
+				0496211527DA6A1600914F89 /* AuthError.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -414,6 +422,7 @@
 			children = (
 				0479B18C271B203A00BE105D /* User Story */,
 				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
+				04FEADBA27BE3B2C00CF42A7 /* PasswordHacker.swift */,
 				0408EF2E279CAAC000DB50CF /* Coordinators */,
 				045632FD277127A6005BF41B /* CustomViews + extension */,
 				0479B18B271B1FC100BE105D /* Models */,
@@ -662,11 +671,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0496211827DA6AC400914F89 /* extension - ViewController.swift in Sources */,
 				04AA88D02789FA4300825AD3 /* FeedView.swift in Sources */,
 				045632FC27712782005BF41B /* CustomButton.swift in Sources */,
+				04FEADBB27BE3B2C00CF42A7 /* PasswordHacker.swift in Sources */,
 				04AA88CE2789F9AD00825AD3 /* ModelScenario.swift in Sources */,
 				0408EF25279C95D900DB50CF /* AnimalService.swift in Sources */,
 				04EFB28C27A1FDB600262297 /* AnimalsCoordinator.swift in Sources */,
+				0496211627DA6A1600914F89 /* AuthError.swift in Sources */,
 				0495EBE026B3247400D37E52 /* Photos.swift in Sources */,
 				049D7D56279D6AC0003B0DFE /* FeedCoordinator.swift in Sources */,
 				0476944C274114A800B5DF20 /* CurrentUserService.swift in Sources */,
