@@ -3,7 +3,7 @@ import Foundation
 import UIKit
 
 protocol AnimalsViewInput: AnyObject {
-    func setImage(animal: [UIImage])
+    func setImage(animal: [UIImage], animals: [UIImage])
 }
 
 protocol AnimalsViewOutput: AnyObject {
@@ -21,6 +21,7 @@ final class AnimalsPresenter: AnimalsViewOutput {
     
     func showImage(name: String) {
         let arrayAnimals = animalsStorage.animalImage.animalsImage
-        viewInput?.setImage(animal: arrayAnimals)
+        let arrayAnimalsNew = animalsStorage.animalImageNew.animalsImage
+        viewInput?.setImage(animal: arrayAnimals, animals: arrayAnimalsNew)
     }
 }

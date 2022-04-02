@@ -27,6 +27,7 @@
 		043CA2E026A9F3D2003CB5A7 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA2DF26A9F3D2003CB5A7 /* PhotosCollectionViewCell.swift */; };
 		0441A77826A5FE3600D4FB60 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441A77726A5FE3600D4FB60 /* PhotosViewController.swift */; };
 		0445AD7727A472FC003F9064 /* AnimalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445AD7627A472FC003F9064 /* AnimalStorage.swift */; };
+		044ACF9627CE8B6F0048311F /* AnimalsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044ACF9527CE8B6F0048311F /* AnimalsCollectionView.swift */; };
 		04561CA02689264800054BB1 /* PostVk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04561C9F2689264800054BB1 /* PostVk.swift */; };
 		045632FC27712782005BF41B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045632FB27712782005BF41B /* CustomButton.swift */; };
 		04587FD82721E9930054B6CF /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 04587FD72721E9930054B6CF /* iOSIntPackage */; };
@@ -113,6 +114,7 @@
 		043CA2DF26A9F3D2003CB5A7 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		0441A77726A5FE3600D4FB60 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		0445AD7627A472FC003F9064 /* AnimalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalStorage.swift; sourceTree = "<group>"; };
+		044ACF9527CE8B6F0048311F /* AnimalsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsCollectionView.swift; sourceTree = "<group>"; };
 		04561C9F2689264800054BB1 /* PostVk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVk.swift; sourceTree = "<group>"; };
 		045632FB27712782005BF41B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		045D1565268CE9F900E82C38 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				0408588D27A09416005AC71F /* AnimalsCollectionViewCell.swift */,
 				0408588F27A097CA005AC71F /* AnimalsViewController.swift */,
+				044ACF9527CE8B6F0048311F /* AnimalsCollectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				04C04F39279735AF00701FBB /* PostView.swift in Sources */,
 				04CCBC2D2657E17F0075342C /* ProfileViewController.swift in Sources */,
 				04AC1FAF2698F5550019AE39 /* PhotosCell.swift in Sources */,
+				044ACF9627CE8B6F0048311F /* AnimalsCollectionView.swift in Sources */,
 				04AC1FAD2698E5C40019AE39 /* PhotosTableViewCell.swift in Sources */,
 				0408EF32279CAB4200DB50CF /* BaseCoordinator.swift in Sources */,
 				0408EF34279CACD100DB50CF /* ModuleFactory.swift in Sources */,
