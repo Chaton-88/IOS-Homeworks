@@ -1,7 +1,16 @@
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
+    
+    private let publisher = ImagePublisherFacade()
+    
+    private var dataSource: [UIImage]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     private let layout = UICollectionViewFlowLayout()
     
@@ -11,8 +20,8 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
-        
         setupCollectionView()
+        publisher.addImagesWithTimer(time: 0.3, repeat: 21, userImages: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,9 +51,18 @@ private extension PhotosViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         
+        publisher.subscribe(self)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
+    }
+}
+
+// MARK: Subscriber
+extension PhotosViewController: ImageLibrarySubscriber {
+    
+    func receive(images: [UIImage]) {
+        dataSource = images
     }
 }
 
@@ -52,15 +70,23 @@ private extension PhotosViewController {
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Storage.photosImage.count
+        if let dataSourse = dataSource {
+            return dataSourse.count
+        } else {
+            return Storage.photosImage.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
-        
-        cell.photo = Storage.photosImage[indexPath.row]
-        return cell
+        if let dataSourse = dataSource {
+            cell.photo = dataSourse[indexPath.row]
+            return cell
+        } else {
+            cell.photo = Storage.photosImage[indexPath.row]
+            return cell
+        }
     }
 }
 
