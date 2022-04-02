@@ -7,15 +7,34 @@ class ProfileViewController: UIViewController {
   
     private let identifierOneCell = "idOneCell"
     private let identifierTwoCell = "idTwoCell"
-    
+   
+    var userService: UserService
+    var userName: String
+
+    init(userService: UserService, userName: String) {
+        self.userService = userService
+        self.userName = userName
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
     }
-    
+
     private func setupTableView() {
         view.addSubview(tableView)
+        
+        #if DEBUG
+        tableView.backgroundColor = .white
+        #else
+        tableView.backgroundColor = .lightGray
+        #endif
         
         tableView.toAutoLayout()
         tableView.dataSource = self
@@ -62,7 +81,6 @@ extension ProfileViewController: UITableViewDataSource {
     }
 }
 
-
 // MARK: UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     
@@ -72,7 +90,12 @@ extension ProfileViewController: UITableViewDelegate {
             return nil
         }
         
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileTableHeaderView.headerId) as? ProfileTableHeaderView
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileTableHeaderView.headerId) as! ProfileTableHeaderView
+        
+        headerView.headerView.fullNameLabel.text = userName
+        let user = userService.verification(fullname: userName)
+        headerView.headerView.statusLabel.text = user?.status
+        headerView.headerView.avatarImageView.image = user?.avatar
         return headerView
     }
     

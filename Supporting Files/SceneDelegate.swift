@@ -2,17 +2,43 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
-
+   
+    private var rootCoordinator: AppCoordinator!
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let scene = (scene as? UIWindowScene) else { return }
+        
+        let tabController = UITabBarController()
+        let factory = ModuleFactory()
+        rootCoordinator = AppCoordinator(tabBarController: tabController, factory: factory)
+        
+        window = UIWindow(windowScene: scene)
+        window?.rootViewController = tabController
+        window?.makeKeyAndVisible()
+        
+        rootCoordinator.start()
+        
+        
+      //  window?.rootViewController = tabController
+       // let feedController = FeedViewController(model: model)
+//        let presenter = PostPresenter()
+//        let postController = PostViewController(presenter: presenter)
+//        presenter.viewInput = postController
+//        let loginController = LogInViewController()
+      //  let feedNavigation = UINavigationController(rootViewController: feedController)
+      //  let loginNavigation = UINavigationController(rootViewController: loginController)
+        //tabController.viewControllers = [feedNavigation, loginNavigation]
+     //   tabController.viewControllers = [postController, loginNavigation]
+//
+//        let factory = MyLoginFactory()
+//        loginController.delegate = factory.checking()
+//
+//        window?.makeKeyAndVisible()
     }
-
+   
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

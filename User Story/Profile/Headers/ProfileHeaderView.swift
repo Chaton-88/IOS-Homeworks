@@ -1,10 +1,11 @@
 
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UIView {
     
-    private let avatarImageView: UIImageView = {
-        let avatarImageView = UIImageView(image: #imageLiteral(resourceName: "Incognito"))
+    let avatarImageView: UIImageView = {
+        let avatarImageView = UIImageView()
         avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.borderColor = UIColor.white.cgColor
         avatarImageView.layer.cornerRadius = 55
@@ -13,39 +14,23 @@ class ProfileHeaderView: UIView {
         return avatarImageView
     }()
     
-    private let fullNameLabel: UILabel = {
+    let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
-        fullNameLabel.text = "Incognito"
         fullNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         fullNameLabel.textColor = .black
         fullNameLabel.toAutoLayout()
         return fullNameLabel
     }()
     
-    private let statusLabel: UILabel = {
+    let statusLabel: UILabel = {
         let statusLabel = UILabel()
-        statusLabel.text = "Waiting for something..."
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         statusLabel.textColor = .gray
         statusLabel.toAutoLayout()
         return statusLabel
     }()
     
-    private let setStatusButton: UIButton = {
-        let setStatusButton = UIButton()
-        setStatusButton.setTitle("Show status", for: .normal)
-        setStatusButton.setTitleColor(.white, for: .normal)
-        setStatusButton.backgroundColor = .blue
-        setStatusButton.layer.cornerRadius = 14
-        setStatusButton.layer.shadowOffset.width = 4
-        setStatusButton.layer.shadowOffset.height = 4
-        setStatusButton.layer.shadowRadius = 4
-        setStatusButton.layer.shadowColor = UIColor.black.cgColor
-        setStatusButton.layer.shadowOpacity = 0.7
-        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        setStatusButton.toAutoLayout()
-        return setStatusButton
-    }()
+    private let setStatusButton = CustomButton(title: "Show status", titleColor: .white)
     
     private let statusTextField: UITextField = {
         let statusTextField = UITextField()
@@ -74,46 +59,54 @@ class ProfileHeaderView: UIView {
         statusTextLabel.addSubview(statusTextField)
         
         statusTextLabel.toAutoLayout()
+        self.setStatusButton.backgroundColor = .blue
         
-        NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            avatarImageView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -40),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 110),
-            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
-            
-            fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 150),
-            fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            fullNameLabel.bottomAnchor.constraint(equalTo: statusLabel.topAnchor, constant: -45),
-            
-            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 45),
-            statusLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 150),
-            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            
-            statusTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 150),
-            statusTextLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            statusTextLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
-            statusTextLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -10),
-            
-            statusTextField.leadingAnchor.constraint(equalTo: statusTextLabel.leadingAnchor, constant: 10),
-            statusTextField.trailingAnchor.constraint(equalTo: statusTextLabel.trailingAnchor, constant: .zero),
-            statusTextField.topAnchor.constraint(equalTo: statusTextLabel.topAnchor, constant: .zero),
-            statusTextField.bottomAnchor.constraint(equalTo: statusTextLabel.bottomAnchor, constant: .zero),
-            
-            setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
-        ])
+        avatarImageView.snp.makeConstraints { (make) in
+            make.top.leading.equalTo(16)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-40)
+            make.width.height.equalTo(110)
+        }
+        
+        fullNameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(27)
+            make.bottom.equalTo(statusLabel.snp.top).offset(-45)
+            make.leading.equalTo(150)
+            make.trailing.equalTo(-16)
+        }
+        
+        statusLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(fullNameLabel.snp.bottom).offset(45)
+            make.leading.equalTo(150)
+            make.trailing.equalTo(-16)
+        }
+        
+        statusTextLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(statusLabel.snp.bottom).offset(10)
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-10)
+            make.leading.equalTo(150)
+            make.trailing.equalTo(-16)
+        }
+        
+        statusTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(statusTextLabel.snp.top)
+            make.bottom.equalTo(statusTextLabel.snp.bottom)
+            make.leading.equalTo(statusTextLabel.snp.leading).offset(10)
+            make.trailing.equalTo(statusTextLabel.snp.trailing)
+        }
+        
+        setStatusButton.snp.makeConstraints { (make) in
+            make.bottom.trailing.equalTo(-16)
+            make.leading.equalTo(16)
+            make.height.equalTo(50)
+        }
+        
+        self.setStatusButton.buttonAction = {
+            self.statusLabel.text = "\(self.statusText)"
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func buttonPressed() {
-        statusLabel.text = "\(statusText)"
     }
     
     private var statusText: String = ""
