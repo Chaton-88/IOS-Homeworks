@@ -21,6 +21,8 @@
 		04124DD8273EFAF00050A4CA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04124DD7273EFAF00050A4CA /* User.swift */; };
 		04131AF2268A46B2003EFF8D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04131AF1268A46B2003EFF8D /* ProfileTableViewCell.swift */; };
 		041464D92676829F008F599F /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041464D82676829F008F599F /* LogInView.swift */; };
+		0419FDDE2821286C004DF868 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419FDDD2821286C004DF868 /* NetworkService.swift */; };
+		0419FDE028212ABE004DF868 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419FDDF28212ABE004DF868 /* AppConfiguration.swift */; };
 		04384493275E7ED00026BCE8 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04384492275E7ED00026BCE8 /* LoginInspector.swift */; };
 		04384495275E7F250026BCE8 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04384494275E7F250026BCE8 /* Checker.swift */; };
 		04384497275E7F490026BCE8 /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04384496275E7F490026BCE8 /* MyLoginFactory.swift */; };
@@ -108,6 +110,8 @@
 		04124DD7273EFAF00050A4CA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		04131AF1268A46B2003EFF8D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		041464D82676829F008F599F /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		0419FDDD2821286C004DF868 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		0419FDDF28212ABE004DF868 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		04384492275E7ED00026BCE8 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		04384494275E7F250026BCE8 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		04384496275E7F490026BCE8 /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
@@ -277,6 +281,15 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		0419FDE128212D39004DF868 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0419FDDD2821286C004DF868 /* NetworkService.swift */,
+				0419FDDF28212ABE004DF868 /* AppConfiguration.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		041E042127A68E7300A3A2B5 /* DataSourse */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +441,7 @@
 				04FEADBA27BE3B2C00CF42A7 /* PasswordHacker.swift */,
 				0408EF2E279CAAC000DB50CF /* Coordinators */,
 				045632FD277127A6005BF41B /* CustomViews + extension */,
+				0419FDE128212D39004DF868 /* Networking */,
 				0479B18B271B1FC100BE105D /* Models */,
 				0479B18F271B224900BE105D /* Storage */,
 				0479B18A271B1E7200BE105D /* Supporting Files */,
@@ -696,6 +710,7 @@
 				060782B6250CE27700A87020 /* FeedViewController.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
 				0407CA3B27987DDD0050D3D4 /* PostPresenter.swift in Sources */,
+				0419FDDE2821286C004DF868 /* NetworkService.swift in Sources */,
 				0479B191271B239F00BE105D /* Section.swift in Sources */,
 				04384493275E7ED00026BCE8 /* LoginInspector.swift in Sources */,
 				0408588E27A09416005AC71F /* AnimalsCollectionViewCell.swift in Sources */,
@@ -715,6 +730,7 @@
 				0408EF32279CAB4200DB50CF /* BaseCoordinator.swift in Sources */,
 				0408EF34279CACD100DB50CF /* ModuleFactory.swift in Sources */,
 				060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */,
+				0419FDE028212ABE004DF868 /* AppConfiguration.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
 				04EFB28727A1EFB500262297 /* AnimalsPhoto.swift in Sources */,
 				04131AF2268A46B2003EFF8D /* ProfileTableViewCell.swift in Sources */,
