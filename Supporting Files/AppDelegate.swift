@@ -5,7 +5,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        if let appConfiguration = AppConfiguration.allCases.randomElement()?.rawValue {
+            guard let url = URL(string: appConfiguration) else { fatalError("some error") }
+            NetworkService.makeRequest(url: url)
+        }
         return true
     }
 
